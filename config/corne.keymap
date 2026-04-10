@@ -1,0 +1,198 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/rgb.h>
+#include <dt-bindings/zmk/outputs.h>
+
+/ {
+
+    // ─── Macros Unicode ────────────────────────────────────────────────────
+    macros {
+
+        // ── Linux: Ctrl+Shift+U → hex → Enter (GTK) ──────────────────────
+        m_a:   m_a   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp E &kp N1 &kp RET>; };
+        m_e:   m_e   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp E &kp N9 &kp RET>; };
+        m_i:   m_i   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp E &kp D &kp RET>; };
+        m_o:   m_o   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp F &kp N3 &kp RET>; };
+        m_u:   m_u   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp F &kp A &kp RET>; };
+        m_n:   m_n   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp F &kp N1 &kp RET>; };
+        m_qmark: m_qmark { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp B &kp F &kp RET>; };
+        // Mayúsculas Linux
+        m_A:   m_A   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp C &kp N1 &kp RET>; };
+        m_E:   m_E   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp C &kp N9 &kp RET>; };
+        m_I:   m_I   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp C &kp D &kp RET>; };
+        m_O:   m_O   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp D &kp N3 &kp RET>; };
+        m_U:   m_U   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp D &kp A &kp RET>; };
+        m_N:   m_N   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
+                       <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp D &kp N1 &kp RET>; };
+
+        // ── Windows: WinCompose (RALT = Compose key) + U → hex → Enter ───
+        // Si tu Compose key es otra, reemplazá RALT en todas las líneas siguientes.
+        m_a_w:  m_a_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp E &kp N1 &kp RET>; };
+        m_e_w:  m_e_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp E &kp N9 &kp RET>; };
+        m_i_w:  m_i_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp E &kp D &kp RET>; };
+        m_o_w:  m_o_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp F &kp N3 &kp RET>; };
+        m_u_w:  m_u_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp F &kp A &kp RET>; };
+        m_n_w:  m_n_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp F &kp N1 &kp RET>; };
+        m_qm_w: m_qm_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp B &kp F &kp RET>; };
+        // Mayúsculas Windows
+        m_A_w:  m_A_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp C &kp N1 &kp RET>; };
+        m_E_w:  m_E_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp C &kp N9 &kp RET>; };
+        m_I_w:  m_I_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp C &kp D &kp RET>; };
+        m_O_w:  m_O_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp D &kp N3 &kp RET>; };
+        m_U_w:  m_U_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp D &kp A &kp RET>; };
+        m_N_w:  m_N_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+            bindings = <&macro_tap &kp RALT &kp U &kp D &kp N1 &kp RET>; };
+    };
+
+    // ─── mod_morph: normal = minúscula, Shift = mayúscula ─────────────────
+    behaviors {
+        // Linux
+        es_a: es_a { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_a>, <&m_A>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_e: es_e { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_e>, <&m_E>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_i: es_i { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_i>, <&m_I>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_o: es_o { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_o>, <&m_O>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_u: es_u { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_u>, <&m_U>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_n: es_n { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_n>, <&m_N>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        // Windows
+        es_a_w: es_a_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_a_w>, <&m_A_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_e_w: es_e_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_e_w>, <&m_E_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_i_w: es_i_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_i_w>, <&m_I_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_o_w: es_o_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_o_w>, <&m_O_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_u_w: es_u_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_u_w>, <&m_U_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+        es_n_w: es_n_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
+            bindings = <&m_n_w>, <&m_N_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // ── Layer 0: QWERTY ───────────────────────────────────────────────
+        default_layer {
+            bindings = <
+   &kp TAB   &kp Q &kp W &kp E &kp R &kp T      &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
+   &kp LSHFT &kp A &kp S &kp D &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+   &kp LCTRL &kp Z &kp X &kp C &kp V &kp B      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
+                   &kp LALT &mo 1 &kp SPACE      &kp RET &mo 2 &kp LGUI
+            >;
+        };
+
+        // ── Layer 1: Números + Movimiento ─────────────────────────────────
+        lower_layer {
+            bindings = <
+   &trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5      &kp N6   &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
+   &trans &kp N6 &kp N7 &kp N8 &kp N9 &kp N0      &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &es_n     &kp DEL
+   &trans &none  &none  &none  &none  &none        &kp HOME &kp PG_UP &kp PG_DN &kp END   &m_qmark  &none
+                        &kp LALT &trans &kp SPACE   &kp RET  &mo 3     &kp LGUI
+            >;
+        };
+
+        // ── Layer 2: Símbolos ──────────────────────────────────────────────
+        // &sl 4 activa tildes Linux. Si Layer 5 (modo Windows) está activo,
+        // ese &sl 4 queda sobreescrito por &sl 6 (tildes Windows).
+        // &out OUT_TOG reemplaza UC_NEXT: cambia entre salida USB y BLE.
+        raise_layer {
+            bindings = <
+   &trans &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT     &kp CARET &kp AMPS  &kp ASTRK &kp LPAR &kp RPAR &kp BSPC
+   &trans &sl 4    &none  &none    &none    &none           &kp MINUS &kp EQUAL &kp LBKT  &kp RBKT &kp BSLH &kp GRAVE
+   &trans &none    &none  &none    &none    &none           &kp UNDER &kp PLUS  &kp LBRC  &kp RBRC &kp PIPE &kp TILDE
+                          &kp LALT &mo 3 &out OUT_TOG       &kp RET   &trans    &kp LGUI
+            >;
+        };
+
+        // ── Layer 3: Funciones + RGB + Bluetooth ──────────────────────────
+        // &tog 5 en el thumb derecho cambia el modo Unicode (Linux ↔ Windows)
+        adjust_layer {
+            bindings = <
+   &bootloader     &rgb_ug RGB_BRD &rgb_ug RGB_BRI &kp F1 &kp F2 &kp F3      &kp F4    &kp F5   &kp F6   &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE
+   &rgb_ug RGB_TOG &rgb_ug RGB_SAD &rgb_ug RGB_SAI &kp F7 &kp F8 &kp F9      &kp F10   &kp F11  &kp F12  &kp C_PREV   &kp C_PP     &kp C_NEXT
+   &rgb_ug RGB_EFF &rgb_ug RGB_HUD &rgb_ug RGB_HUI &none  &none  &none        &kp PSCRN &none    &none    &bt BT_CLR   &bt BT_SEL 0 &bt BT_SEL 1
+                                   &kp LALT &trans &kp SPACE                  &kp RET   &tog 5   &kp LGUI
+            >;
+        };
+
+        // ── Layer 4: Tildes Linux ──────────────────────────────────────────
+        // Activada via &sl 4 desde Layer 2 (modo Linux).
+        // Con Shift sostenido al tipear → mod_morph envía la mayúscula.
+        tildes_layer {
+            bindings = <
+   &trans &trans &trans &es_e  &trans &trans      &trans &es_u  &es_i  &es_o  &trans &trans
+   &trans &es_a  &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+                        &trans &trans &trans      &trans &trans &trans
+            >;
+        };
+
+        // ── Layer 5: Modo Windows (toggle) ────────────────────────────────
+        // Activar/desactivar con [L3] + thumb derecho (&tog 5).
+        // Cuando está activo, sobreescribe &sl 4 → &sl 6 en la posición de tildes.
+        // Todo lo demás es &trans para no interferir con las capas inferiores.
+        win_mode_layer {
+            bindings = <
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+   &trans &sl 6  &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+                        &trans &trans &trans      &trans &trans &trans
+            >;
+        };
+
+        // ── Layer 6: Tildes Windows (WinCompose) ──────────────────────────
+        // Activada via &sl 6 desde Layer 5 cuando modo Windows está activo.
+        tildes_win_layer {
+            bindings = <
+   &trans  &trans  &trans  &es_e_w &trans &trans      &trans  &es_u_w &es_i_w &es_o_w &trans &trans
+   &trans  &es_a_w &trans  &trans  &trans &trans      &trans  &trans  &trans  &trans  &trans &trans
+   &trans  &trans  &trans  &trans  &trans &trans      &trans  &trans  &trans  &trans  &trans &trans
+                           &trans  &trans &trans      &trans  &trans  &trans
+            >;
+        };
+    };
+};
