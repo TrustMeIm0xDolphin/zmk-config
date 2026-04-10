@@ -32,22 +32,22 @@
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp B &kp F &kp RET>; };
         // Mayúsculas Linux
-        m_A:   m_A   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_a_up: m_a_up { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp C &kp N1 &kp RET>; };
-        m_E:   m_E   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_e_up: m_e_up { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp C &kp N9 &kp RET>; };
-        m_I:   m_I   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_i_up: m_i_up { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp C &kp D &kp RET>; };
-        m_O:   m_O   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_o_up: m_o_up { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp D &kp N3 &kp RET>; };
-        m_U:   m_U   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_u_up: m_u_up { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp D &kp A &kp RET>; };
-        m_N:   m_N   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_n_up: m_n_up { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_press &kp LCTRL &kp LSHFT>, <&macro_tap &kp U>,
                        <&macro_release &kp LSHFT &kp LCTRL>, <&macro_tap &kp D &kp N1 &kp RET>; };
 
@@ -68,17 +68,17 @@
         m_qm_w: m_qm_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp B &kp F &kp RET>; };
         // Mayúsculas Windows
-        m_A_w:  m_A_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_a_up_w: m_a_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp C &kp N1 &kp RET>; };
-        m_E_w:  m_E_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_e_up_w: m_e_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp C &kp N9 &kp RET>; };
-        m_I_w:  m_I_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_i_up_w: m_i_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp C &kp D &kp RET>; };
-        m_O_w:  m_O_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_o_up_w: m_o_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp D &kp N3 &kp RET>; };
-        m_U_w:  m_U_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_u_up_w: m_u_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp D &kp A &kp RET>; };
-        m_N_w:  m_N_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_n_up_w: m_n_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp D &kp N1 &kp RET>; };
     };
 
@@ -86,30 +86,30 @@
     behaviors {
         // Linux
         es_a: es_a { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_a>, <&m_A>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_a>, <&m_a_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_e: es_e { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_e>, <&m_E>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_e>, <&m_e_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_i: es_i { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_i>, <&m_I>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_i>, <&m_i_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_o: es_o { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_o>, <&m_O>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_o>, <&m_o_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_u: es_u { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_u>, <&m_U>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_u>, <&m_u_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_n: es_n { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_n>, <&m_N>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_n>, <&m_n_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         // Windows
         es_a_w: es_a_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_a_w>, <&m_A_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_a_w>, <&m_a_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_e_w: es_e_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_e_w>, <&m_E_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_e_w>, <&m_e_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_i_w: es_i_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_i_w>, <&m_I_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_i_w>, <&m_i_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_o_w: es_o_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_o_w>, <&m_O_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_o_w>, <&m_o_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_u_w: es_u_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_u_w>, <&m_U_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_u_w>, <&m_u_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_n_w: es_n_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
-            bindings = <&m_n_w>, <&m_N_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+            bindings = <&m_n_w>, <&m_n_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
     };
 
     keymap {
