@@ -6,7 +6,26 @@
 
 / {
 
-    // ─── Macros Unicode ────────────────────────────────────────────────────
+    // ── Capas condicionales ───────────────────────────────────────────────
+    // Se activan automáticamente cuando ambas capas indicadas están activas.
+    // Esto evita que el modo Windows interfiera con la capa base.
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        // Raise (2) + modo Windows (5) → Raise Windows (6) con &sl 7
+        win_raise_layer {
+            if-layers = <2 5>;
+            then-layer = <6>;
+        };
+
+        // Lower (1) + modo Windows (5) → Lower Windows (8) con es_n_w y m_qm_w
+        win_lower_layer {
+            if-layers = <1 5>;
+            then-layer = <8>;
+        };
+    };
+
+    // ── Macros Unicode ────────────────────────────────────────────────────
     macros {
 
         // ── Linux: Ctrl+Shift+U → hex → Enter (GTK) ──────────────────────
@@ -53,19 +72,19 @@
 
         // ── Windows: WinCompose (RALT = Compose key) + U → hex → Enter ───
         // Si tu Compose key es otra, reemplazá RALT en todas las líneas siguientes.
-        m_a_w:  m_a_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_a_w:    m_a_w    { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp E &kp N1 &kp RET>; };
-        m_e_w:  m_e_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_e_w:    m_e_w    { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp E &kp N9 &kp RET>; };
-        m_i_w:  m_i_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_i_w:    m_i_w    { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp E &kp D &kp RET>; };
-        m_o_w:  m_o_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_o_w:    m_o_w    { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp F &kp N3 &kp RET>; };
-        m_u_w:  m_u_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_u_w:    m_u_w    { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp F &kp A &kp RET>; };
-        m_n_w:  m_n_w  { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_n_w:    m_n_w    { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp F &kp N1 &kp RET>; };
-        m_qm_w: m_qm_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
+        m_qm_w:   m_qm_w   { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
             bindings = <&macro_tap &kp RALT &kp U &kp B &kp F &kp RET>; };
         // Mayúsculas Windows
         m_a_up_w: m_a_up_w { compatible = "zmk,behavior-macro"; #binding-cells = <0>;
@@ -82,9 +101,10 @@
             bindings = <&macro_tap &kp RALT &kp U &kp D &kp N1 &kp RET>; };
     };
 
-    // ─── mod_morph: normal = minúscula, Shift = mayúscula ─────────────────
+    // ── Behaviors ─────────────────────────────────────────────────────────
     behaviors {
-        // Linux
+
+        // mod_morph Linux: normal = minúscula, Shift = mayúscula
         es_a: es_a { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
             bindings = <&m_a>, <&m_a_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_e: es_e { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
@@ -97,7 +117,8 @@
             bindings = <&m_u>, <&m_u_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_n: es_n { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
             bindings = <&m_n>, <&m_n_up>; mods = <(MOD_LSFT|MOD_RSFT)>; };
-        // Windows
+
+        // mod_morph Windows: normal = minúscula, Shift = mayúscula
         es_a_w: es_a_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
             bindings = <&m_a_w>, <&m_a_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_e_w: es_e_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
@@ -110,6 +131,14 @@
             bindings = <&m_u_w>, <&m_u_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
         es_n_w: es_n_w { compatible = "zmk,behavior-mod-morph"; #binding-cells = <0>;
             bindings = <&m_n_w>, <&m_n_up_w>; mods = <(MOD_LSFT|MOD_RSFT)>; };
+
+        // Tap-dance LSHIFT: 1x = Shift | 2x = Caps Word
+        td_shift: td_shift {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp LSHFT>, <&caps_word>;
+        };
     };
 
     keymap {
@@ -119,13 +148,14 @@
         default_layer {
             bindings = <
    &kp TAB   &kp Q &kp W &kp E &kp R &kp T      &kp Y &kp U  &kp I     &kp O   &kp P    &kp BSPC
-   &kp LSHFT &kp A &kp S &kp D &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+   &td_shift &kp A &kp S &kp D &kp F &kp G      &kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
    &kp LCTRL &kp Z &kp X &kp C &kp V &kp B      &kp N &kp M  &kp COMMA &kp DOT &kp FSLH &kp ESC
                    &kp LALT &mo 1 &kp SPACE      &kp RET &mo 2 &kp LGUI
             >;
         };
 
-        // ── Layer 1: Números + Movimiento ─────────────────────────────────
+        // ── Layer 1: Lower — Números + Movimiento (Linux) ─────────────────
+        // En modo Windows, conditional layer 8 sobreescribe es_n y m_qmark
         lower_layer {
             bindings = <
    &trans &kp N1 &kp N2 &kp N3 &kp N4 &kp N5      &kp N6   &kp N7    &kp N8    &kp N9    &kp N0    &kp BSPC
@@ -135,9 +165,9 @@
             >;
         };
 
-        // ── Layer 2: Símbolos ──────────────────────────────────────────────
-        // &sl 4 activa tildes Linux. Si Layer 5 (modo Windows) está activo,
-        // ese &sl 4 queda sobreescrito por &sl 6 (tildes Windows).
+        // ── Layer 2: Raise — Símbolos (Linux) ─────────────────────────────
+        // &sl 4 activa tildes Linux.
+        // En modo Windows, conditional layer 6 sobreescribe &sl 4 por &sl 7.
         // &out OUT_TOG reemplaza UC_NEXT: cambia entre salida USB y BLE.
         raise_layer {
             bindings = <
@@ -148,8 +178,8 @@
             >;
         };
 
-        // ── Layer 3: Funciones + RGB + Bluetooth ──────────────────────────
-        // &tog 5 en el thumb derecho cambia el modo Unicode (Linux ↔ Windows)
+        // ── Layer 3: Adjust — Funciones + RGB + Bluetooth ─────────────────
+        // &tog 5 activa/desactiva el modo Windows (thumb derecho)
         adjust_layer {
             bindings = <
    &bootloader     &rgb_ug RGB_BRD &rgb_ug RGB_BRI &kp F1 &kp F2 &kp F3      &kp F4    &kp F5   &kp F6   &kp C_VOL_DN &kp C_VOL_UP &kp C_MUTE
@@ -160,8 +190,8 @@
         };
 
         // ── Layer 4: Tildes Linux ──────────────────────────────────────────
-        // Activada via &sl 4 desde Layer 2 (modo Linux).
-        // Con Shift sostenido al tipear → mod_morph envía la mayúscula.
+        // Activada via &sl 4 desde Layer 2.
+        // Shift sostenido → mod_morph envía mayúscula.
         tildes_layer {
             bindings = <
    &trans &trans &trans &es_e  &trans &trans      &trans &es_u  &es_i  &es_o  &trans &trans
@@ -172,26 +202,49 @@
         };
 
         // ── Layer 5: Modo Windows (toggle) ────────────────────────────────
-        // Activar/desactivar con [L3] + thumb derecho (&tog 5).
-        // Cuando está activo, sobreescribe &sl 4 → &sl 6 en la posición de tildes.
-        // Todo lo demás es &trans para no interferir con las capas inferiores.
+        // TODO &trans — es solo una bandera para activar las conditional layers.
+        // No interfiere con ninguna tecla de la capa base.
         win_mode_layer {
             bindings = <
    &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
-   &trans &sl 6  &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
    &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
                         &trans &trans &trans      &trans &trans &trans
             >;
         };
 
-        // ── Layer 6: Tildes Windows (WinCompose) ──────────────────────────
-        // Activada via &sl 6 desde Layer 5 cuando modo Windows está activo.
+        // ── Layer 6: Raise Windows ────────────────────────────────────────
+        // Auto-activada por conditional layer cuando Raise (2) + Windows (5).
+        // Solo sobreescribe &sl 4 → &sl 7. Todo lo demás &trans.
+        raise_win_layer {
+            bindings = <
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+   &trans &sl 7  &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans &trans
+                        &trans &trans &trans      &trans &trans &trans
+            >;
+        };
+
+        // ── Layer 7: Tildes Windows ───────────────────────────────────────
+        // Activada via &sl 7 desde Layer 6 (Raise Windows).
         tildes_win_layer {
             bindings = <
    &trans  &trans  &trans  &es_e_w &trans &trans      &trans  &es_u_w &es_i_w &es_o_w &trans &trans
    &trans  &es_a_w &trans  &trans  &trans &trans      &trans  &trans  &trans  &trans  &trans &trans
    &trans  &trans  &trans  &trans  &trans &trans      &trans  &trans  &trans  &trans  &trans &trans
                            &trans  &trans &trans      &trans  &trans  &trans
+            >;
+        };
+
+        // ── Layer 8: Lower Windows ────────────────────────────────────────
+        // Auto-activada por conditional layer cuando Lower (1) + Windows (5).
+        // Solo sobreescribe es_n y m_qmark con sus equivalentes Windows.
+        lower_win_layer {
+            bindings = <
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &trans   &trans
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &es_n_w  &trans
+   &trans &trans &trans &trans &trans &trans      &trans &trans &trans &trans &m_qm_w  &trans
+                        &trans &trans &trans      &trans &trans &trans
             >;
         };
     };
