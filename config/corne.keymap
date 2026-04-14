@@ -6,6 +6,10 @@
 
 / {
 
+    &led_strip {
+	    chain-length = <21>;
+    };
+
     // ── Capas condicionales ───────────────────────────────────────────────
     // Se activan automáticamente cuando ambas capas indicadas están activas.
     // Esto evita que el modo Windows interfiera con la capa base.
