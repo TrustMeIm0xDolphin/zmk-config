@@ -5,11 +5,10 @@
 #include <dt-bindings/zmk/outputs.h>
 
 &led_strip {
-        chain-length = <21>;
+	chain-length = <27>;
 };
 
 / {
-
 
     // ── Capas condicionales ───────────────────────────────────────────────
     // Se activan automáticamente cuando ambas capas indicadas están activas.
