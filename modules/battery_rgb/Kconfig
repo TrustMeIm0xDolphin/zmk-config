@@ -1,0 +1,26 @@
+config ZMK_BATTERY_RGB_BLINK
+    bool "Battery low RGB underglow blink"
+    depends on ZMK_RGB_UNDERGLOW && ZMK_BATTERY_REPORTING
+    help
+      Blink the RGB underglow red when battery drops below the threshold.
+      Each split half monitors its own battery and controls its own LEDs
+      independently.
+
+if ZMK_BATTERY_RGB_BLINK
+
+config ZMK_BATTERY_RGB_BLINK_THRESHOLD
+    int "Low battery threshold (%)"
+    default 20
+    range 1 50
+    help
+      Battery percentage below which the red blink activates.
+
+config ZMK_BATTERY_RGB_BLINK_ON_MS
+    int "Blink on duration (ms)"
+    default 500
+
+config ZMK_BATTERY_RGB_BLINK_OFF_MS
+    int "Blink off duration (ms)"
+    default 500
+
+endif
