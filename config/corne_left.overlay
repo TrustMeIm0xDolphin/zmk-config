@@ -1,0 +1,12 @@
+/* CDC ACM UART para CONFIG_ZMK_USB_LOGGING (solo lado central) */
+/ {
+    chosen {
+        zmk,console = &cdc_acm_uart0;
+    };
+};
+
+&usbd {
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};
