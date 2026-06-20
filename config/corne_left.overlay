@@ -1,7 +1,7 @@
 /* CDC ACM UART para CONFIG_ZMK_USB_LOGGING (solo lado central) */
 / {
     chosen {
-        zmk,console = &cdc_acm_uart0;
+        zephyr,console = &cdc_acm_uart0;
     };
 };
 
