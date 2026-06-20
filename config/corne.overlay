@@ -1,0 +1,6 @@
+/* CDC ACM UART requerido por CONFIG_ZMK_USB_LOGGING */
+&usbd {
+    cdc_acm_uart0: cdc_acm_uart0 {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};
